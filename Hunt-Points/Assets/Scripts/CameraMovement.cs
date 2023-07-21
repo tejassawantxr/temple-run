@@ -20,8 +20,8 @@ public class CameraMovement : MonoBehaviour
     {
         moveVector = followAt.position + offset; //follow the player by keeping offset distance in between camera and player
         moveVector.x = 0;  //camera should be at the center
-        moveVector.y = Mathf.Clamp(moveVector.y, 3, 5); 
-        
+        moveVector.y = Mathf.Clamp(moveVector.y, 5, 7); 
+
         transform.position = moveVector;  
     }
 }
