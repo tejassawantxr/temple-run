@@ -4,30 +4,27 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float speed = 5.0f;
-    
-    Vector3 moveVector;
-    float gravity = -9.81f;
-
-    CharacterController controller;
+    [SerializeField] float moveSpeed = 5.0f; 
+    [SerializeField] float rotationSpeed = 5.0f;
     void Start()
     {
-        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(controller.isGrounded){
-            gravity=-0.5f;
-        }else{
-            gravity=-9.81f;
-        }
-        // moveVector = Vector3.zero;
-        moveVector.x = Input.GetAxisRaw("Horizontal") * speed;
-        moveVector.y = gravity;
-        moveVector.z = speed;
+       float xValue = Input.GetAxis("Horizontal");
+       float yValue = 0;
+       float zValue = Input.GetAxis("Vertical");
 
-        controller.Move(moveVector * Time.deltaTime); //frame rate independent
+       Vector3 movementDirection = new Vector3(xValue, yValue, zValue);
+       movementDirection.Normalize();
+       transform.Translate(movementDirection * moveSpeed * Time.deltaTime, Space.World);
+       
+       if(movementDirection != Vector3.zero){
+            // transform.forward = movementDirection;
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,toRotation, rotationSpeed * Time.deltaTime);
+       }
     }
 }
