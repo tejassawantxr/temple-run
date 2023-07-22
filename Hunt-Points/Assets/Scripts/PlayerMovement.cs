@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float rotationSpeed = 5.0f;
 
     CharacterController characterController;
+    Animator animator;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,9 +28,12 @@ public class PlayerMovement : MonoBehaviour
        characterController.SimpleMove(movementDirection * moveSpeed); //Build-in frame rate independent
 
        if(movementDirection != Vector3.zero){
+            animator.SetBool("isMoving", true);
             //Characters smooth rotation to the direction along with the face and body
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up); //Calulates rotation value of how much to rotate
             transform.rotation = Quaternion.RotateTowards(transform.rotation,toRotation, rotationSpeed * Time.deltaTime); //smooth rotation of the characters body to the specific directions
+       }else{
+            animator.SetBool("isMoving", false);
        }
     }
 }
