@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5.0f; 
     [SerializeField] float rotationSpeed = 5.0f;
+    [SerializeField] Transform cameraTransform;
 
     CharacterController characterController;
     Animator animator;
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
             //Characters smooth rotation to the direction along with the face and body
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up); //Calulates rotation value of how much to rotate
             transform.rotation = Quaternion.RotateTowards(transform.rotation,toRotation, rotationSpeed * Time.deltaTime); //smooth rotation of the characters body to the specific directions
+            // transform.rotation = Quaternion.Lerp(transform.rotation,toRotation, rotationSpeed * Time.deltaTime);
        }else{
             animator.SetBool("isMoving", false);
        }
