@@ -23,17 +23,14 @@ public class ScoreManager : MonoBehaviour
         if(hit.gameObject.tag == "Cube"){
             totalPoints += cubePoints;
             PointText.text = "(Cube: +" + cubePoints + ")";
-            Debug.Log("totalPoints Cube==>"+ totalPoints);
             Destroy(hit.gameObject);
         }else if(hit.gameObject.tag == "Cylinder"){
             totalPoints += cylinderPoints;
             PointText.text = "(Cylinder: +" + cylinderPoints + ")";
-            Debug.Log("totalPoints Cylinder==>"+ totalPoints);
             Destroy(hit.gameObject);
         }else if(hit.gameObject.tag == "Sphere"){
             totalPoints += spherePoints;
             PointText.text = "(Sphere: +" + spherePoints + ")";
-            Debug.Log("totalPoints Sphere==>"+ totalPoints);
             Destroy(hit.gameObject);
         }
           totalPointsText.text=((int) totalPoints).ToString();  
